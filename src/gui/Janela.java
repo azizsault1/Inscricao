@@ -5,12 +5,13 @@ import java.awt.Container;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import model.Candidato;
+import validators.PosValidador;
 import validators.PreValidator;
 
 public class Janela extends JFrame {
@@ -22,7 +23,11 @@ public class Janela extends JFrame {
    private static final int LINHA = 15;
    private static final int Y_INICIAL = 20;
    private static final int MARGIN = (LARGURA_TELA / 2) - (LARGURA_COMPONENTE_PADRAO / 2);
+   private static final String RESULTADO = "O Resultado é: ";
+
    private final PreValidator preValidator;
+   private JLabel error;
+   private JLabel resultado;
 
    public Janela() {
       this.preValidator = new PreValidator();
@@ -71,27 +76,40 @@ public class Janela extends JFrame {
       final int LARGURA_OK = 100;
       calcular.setBounds(this.calculaMargin(LARGURA_OK), proximoY, LARGURA_OK, ALTURA_COMPONENTES_PADRAO);
       calcular.addActionListener(e -> {
-         System.out.println("Calculando..." + inscricao.getText());
+         this.executaProcesso(inscricao.getText());
       });
       contentPane.add(calcular);
 
-      final JLabel error = new JLabel("");
+      this.error = new JLabel("");
       proximoY = this.calculaProximoY(proximoY);
-      error.setBounds(MARGIN, proximoY, LARGURA_COMPONENTE_PADRAO, ALTURA_COMPONENTES_PADRAO);
-      error.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-      contentPane.add(error);
+      final int LARGURA_ERRO = 250;
+      this.error.setForeground(Color.RED);
+      this.error.setBounds(this.calculaMargin(LARGURA_ERRO), proximoY, LARGURA_ERRO, ALTURA_COMPONENTES_PADRAO);
+      contentPane.add(this.error);
 
-      final JLabel resultado = new JLabel("O resultado é: ");
+      this.resultado = new JLabel(RESULTADO);
       proximoY = this.calculaProximoY(proximoY);
-      resultado.setBounds(MARGIN, proximoY, LARGURA_COMPONENTE_PADRAO, ALTURA_COMPONENTES_PADRAO);
-      resultado.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-      contentPane.add(resultado);
+      this.resultado.setBounds(MARGIN, proximoY, LARGURA_COMPONENTE_PADRAO, ALTURA_COMPONENTES_PADRAO);
+      contentPane.add(this.resultado);
 
       this.setContentPane(contentPane);
    }
 
+   private void executaProcesso(final String inscricao) {
+      this.error.setText("");
+      final PosValidador posValidador = new PosValidador(inscricao);
+      if (!posValidador.isValid()) {
+         this.error.setText(posValidador.getError());
+         return;
+      }
+
+      final Candidato candidato = new Candidato(inscricao);
+      this.resultado.setText(RESULTADO + candidato.getPosicao());
+
+   }
+
    public static void main(final String[] args) {
-      final Janela j = new Janela();
+      new Janela();
    }
 
 }
