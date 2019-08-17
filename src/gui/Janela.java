@@ -40,7 +40,7 @@ public class Janela extends JFrame {
    private void configureWindow() {
       this.setVisible(Boolean.TRUE);
       this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-      this.setTitle("Cadastro de usuário");
+      this.setTitle("Cadastro de usuario");
       this.setSize(LARGURA_TELA, ALTURA_TELA);
       this.setResizable(Boolean.FALSE);
       this.setLocationRelativeTo(null);
@@ -58,7 +58,7 @@ public class Janela extends JFrame {
       this.setLayout(null);
       final Container contentPane = this.getContentPane();
 
-      final JLabel inscLabel = new JLabel("Número de inscrição:");
+      final JLabel inscLabel = new JLabel("Numero de inscricao:");
       inscLabel.setBounds(MARGIN, Y_INICIAL, LARGURA_COMPONENTE_PADRAO, ALTURA_COMPONENTES_PADRAO);
       this.getContentPane().add(inscLabel);
 
@@ -100,9 +100,9 @@ public class Janela extends JFrame {
    private void executaProcesso(final String inscricao) {
       this.error.setText("");
       try {
-         Candidato candidato = this.service.executa(inscricao);
+         final Candidato candidato = this.service.executa(inscricao);
          this.resultado.setText(RESULTADO + candidato.getPosicao());
-      } catch (Exception e) {
+      } catch (final Exception e) {
          this.error.setText(e.getMessage());
       }
    }
@@ -110,5 +110,4 @@ public class Janela extends JFrame {
    public static void main(final String[] args) {
       new Janela();
    }
-
 }
