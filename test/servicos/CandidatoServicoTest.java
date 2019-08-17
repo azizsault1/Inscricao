@@ -13,29 +13,9 @@ public class CandidatoServicoTest {
       this.servico = new CandidatoServico();
    }
 
-   @Test
-   public void dado75913QuandoBuscaPosicaoRetorna89() {
-      try {
-         this.servico.executa("89");
-         Assert.fail("Expected IllegalArgumentException");
-      } catch (final IllegalArgumentException e) {
-         Assert.assertEquals("A inscricao deve ter apenas valores impares.A inscricao deve ter 5 caracteres.",
-               e.getMessage());
-      }
-   }
-
-   @Test
-   public void dado13579QuandoBuscaPosicaoRetorna1() {
-      final Candidato candidato = this.servico.executa("13579");
-      Assert.assertEquals(1, candidato.getPosicao());
-   }
-
-   @Test
-   public void dado97531QuandoBuscaPosicaoRetorna120() {
-      final Candidato candidato = this.servico.executa("97531");
-      Assert.assertEquals(120, candidato.getPosicao());
-   }
-   
+   /*
+    * Caso de teste 1
+    */
    @Test
    public void dadoUmaInscricaoEmBrancoQuandoBuscaPosicaoRetornaErro(){
       try {
@@ -58,6 +38,41 @@ public class CandidatoServicoTest {
        }
    }
    
+   /*
+    * Caso de teste 2
+    */
+   @Test
+   public void dado13579QuandoBuscaPosicaoRetorna1() {
+      final Candidato candidato = this.servico.executa("13579");
+      Assert.assertEquals(1, candidato.getPosicao());
+   }
+   
+   /*
+    * Caso de teste 3
+    */
+   @Test
+   public void dadoa35bQuandoBuscaPosicaoRetornaErro() {
+      try {
+         this.servico.executa("a35b");
+         Assert.fail("Expected IllegalArgumentException");
+      } catch (final IllegalArgumentException e) {
+         Assert.assertEquals("A inscricao deve ter apenas valores impares.A inscricao deve ter 5 caracteres.",
+               e.getMessage());
+      }
+   }
+   
+   /*
+    * Caso de teste 4
+    */
+   @Test
+   public void dado97531QuandoBuscaPosicaoRetorna120() {
+      final Candidato candidato = this.servico.executa("97531");
+      Assert.assertEquals(120, candidato.getPosicao());
+   }
+   
+   /*
+    * Caso de teste 5
+    */
    @Test
    public void dadoUmaInscricaoComEspacosQuandoBuscaPosicaoRetornaErro(){
       try {
@@ -68,5 +83,18 @@ public class CandidatoServicoTest {
                 e.getMessage());
        }
    }
-
+   
+   /*
+    * Caso de teste 6
+    */
+   @Test
+   public void dado75913QuandoBuscaPosicaoRetorna89() {
+      try {
+         this.servico.executa("89");
+         Assert.fail("Expected IllegalArgumentException");
+      } catch (final IllegalArgumentException e) {
+         Assert.assertEquals("A inscricao deve ter apenas valores impares.A inscricao deve ter 5 caracteres.",
+               e.getMessage());
+      }
+   }
 }
