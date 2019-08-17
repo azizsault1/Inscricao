@@ -98,13 +98,13 @@ public class Janela extends JFrame {
    }
 
    private void executaProcesso(final String inscricao) {
-		this.error.setText("");
-		try {
-			  Candidato candidato = this.service.executa(inscricao);
-			  this.resultado.setText(RESULTADO + candidato.getPosicao());
-		} catch (Exception e) {
-			this.error.setText(e.getMessage());
-		}
+      this.error.setText("");
+      try {
+         Candidato candidato = this.service.executa(inscricao);
+         this.resultado.setText(RESULTADO + candidato.getPosicao());
+      } catch (Exception e) {
+         this.error.setText(e.getMessage());
+      }
    }
 
    public static void main(final String[] args) {

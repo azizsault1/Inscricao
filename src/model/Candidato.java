@@ -8,16 +8,16 @@ public class Candidato {
    public Candidato(final String inscricao) {
       this.inscricao = inscricao;
    }
-   
-   public String getInscricao(){
-	   return inscricao;
+
+   public String getInscricao() {
+      return this.inscricao;
    }
 
    public int getPosicao() {
       return this.posicao;
    }
-   
-   public void setPosicao(int posicao){
-	   this.posicao = posicao;
+
+   public void setPosicao(final int posicao) {
+      this.posicao = posicao;
    }
 }
