@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +13,8 @@ import javax.swing.JTextField;
 
 import model.Candidato;
 import servicos.CandidatoServico;
-import validators.PreValidator;
+import validators.Erro;
+import validators.PreValidador;
 
 public class Janela extends JFrame {
    private static final long serialVersionUID = 1L;
@@ -23,15 +25,15 @@ public class Janela extends JFrame {
    private static final int LINHA = 15;
    private static final int Y_INICIAL = 20;
    private static final int MARGIN = (LARGURA_TELA / 2) - (LARGURA_COMPONENTE_PADRAO / 2);
-   private static final String RESULTADO = "O Resultado é: ";
+   private static final String RESULTADO = "O Resultado eh: ";
 
-   private final PreValidator preValidator;
+   private final PreValidador preValidator;
    private final CandidatoServico service;
    private JLabel error;
    private JLabel resultado;
 
    public Janela() {
-      this.preValidator = new PreValidator();
+      this.preValidator = new PreValidador();
       this.service = new CandidatoServico();
       this.addComponents();
       this.configureWindow();
@@ -68,7 +70,9 @@ public class Janela extends JFrame {
       inscricao.addKeyListener(new KeyAdapter() {
          @Override
          public void keyTyped(final KeyEvent e) {
-            Janela.this.preValidator.validateKeyEvent(e, inscricao.getText());
+        	error.setText("");
+            Optional<Erro> opErro = preValidator.validateKeyEvent(e, inscricao.getText());
+            opErro.ifPresent(erro->error.setText(erro.toString()));
          }
       });
       contentPane.add(inscricao);
@@ -84,7 +88,7 @@ public class Janela extends JFrame {
 
       this.error = new JLabel("");
       proximoY = this.calculaProximoY(proximoY);
-      final int LARGURA_ERRO = 250;
+      final int LARGURA_ERRO = 260;
       this.error.setForeground(Color.RED);
       this.error.setBounds(this.calculaMargin(LARGURA_ERRO), proximoY, LARGURA_ERRO, ALTURA_COMPONENTES_PADRAO);
       contentPane.add(this.error);

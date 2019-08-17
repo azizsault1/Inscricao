@@ -18,7 +18,8 @@ public class CandidatoServico {
    public Candidato registrarCandidato(final String inscricao) {
       final PosValidador posValidador = new PosValidador(inscricao);
       if (!posValidador.isValid()) {
-         throw new IllegalArgumentException(posValidador.getError());
+    	  String mensagem = posValidador.getErros();
+         throw new IllegalArgumentException(mensagem);
       }
 
       return this.calculaPosicao(new Candidato(inscricao));

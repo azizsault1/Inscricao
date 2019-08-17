@@ -1,28 +1,31 @@
 package validators;
 
 import java.awt.event.KeyEvent;
+import java.util.Optional;
 
-public class PreValidator {
+public class PreValidador {
    private static final int MAXIMUM_SIZE = 5;
 
-   public void validateKeyEvent(final KeyEvent e, final String text) {
+   public Optional<Erro> validateKeyEvent(final KeyEvent e, final String text) {
       if (!Character.isDigit(e.getKeyChar())) {
          e.consume();
-         return;
+         return Optional.of(Erro.IMPARES);
       }
       if (text.length() > MAXIMUM_SIZE) {
          e.consume();
-         return;
+         return Optional.of(Erro.QUANTIDADE);
       }
       if (this.isNotValidChar(e.getKeyChar())) {
          e.consume();
-         return;
+         return Optional.of(Erro.IMPARES);
       }
 
       if (text.indexOf(e.getKeyChar()) >= 0) {
          e.consume();
-         return;
+         return Optional.of(Erro.QUANTIDADE);
       }
+      
+      return Optional.empty();
    }
 
    private boolean isNotValidChar(final char value) {
