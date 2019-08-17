@@ -35,5 +35,38 @@ public class CandidatoServicoTest {
       final Candidato candidato = this.servico.executa("97531");
       Assert.assertEquals(120, candidato.getPosicao());
    }
+   
+   @Test
+   public void dadoUmaInscricaoEmBrancoQuandoBuscaPosicaoRetornaErro(){
+      try {
+          this.servico.executa("");
+          Assert.fail("Expected IllegalArgumentException");
+       } catch (final IllegalArgumentException e) {
+          Assert.assertEquals("A inscricao deve ter 5 caracteres.",
+                e.getMessage());
+       }
+   }
+   
+   @Test
+   public void dadoNuloQuandoBuscaPosicaoRetornaErro(){
+      try {
+          this.servico.executa(null);
+          Assert.fail("Expected IllegalArgumentException");
+       } catch (final IllegalArgumentException e) {
+          Assert.assertEquals("A inscricao deve ter 5 caracteres.",
+                e.getMessage());
+       }
+   }
+   
+   @Test
+   public void dadoUmaInscricaoComEspacosQuandoBuscaPosicaoRetornaErro(){
+      try {
+          this.servico.executa("    ");
+          Assert.fail("Expected IllegalArgumentException");
+       } catch (final IllegalArgumentException e) {
+          Assert.assertEquals("A inscricao nao deve ter numeros repetidos.A inscricao deve ter apenas valores impares.A inscricao deve ter 5 caracteres.",
+                e.getMessage());
+       }
+   }
 
 }

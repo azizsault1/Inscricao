@@ -13,12 +13,17 @@ public class PosValidador {
    }
 
    public boolean isValid() {
-      return this.inscricao.matches(REPETICAO) && this.inscricao.matches(NUMEROS_INVALIDOS);
+      return this.inscricao != null && this.inscricao.matches(REPETICAO) 
+    		  && this.inscricao.matches(NUMEROS_INVALIDOS);
    }
 
    public String getError() {
       final StringBuilder errors = new StringBuilder();
 
+      if(this.inscricao == null){
+          return "A inscricao deve ter 5 caracteres.";
+      }
+      
       if (!this.inscricao.matches(REPETICAO)) {
          errors.append("A inscricao nao deve ter numeros repetidos.");
       }
