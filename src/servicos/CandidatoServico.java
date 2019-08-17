@@ -15,7 +15,7 @@ public class CandidatoServico {
       return new ArrayList<>(Arrays.asList('1', '3', '5', '7', '9'));
    }
 
-   public Candidato executa(final String inscricao) {
+   public Candidato registrarCandidato(final String inscricao) {
       final PosValidador posValidador = new PosValidador(inscricao);
       if (!posValidador.isValid()) {
          throw new IllegalArgumentException(posValidador.getError());
