@@ -20,13 +20,13 @@ public class PosValidador {
       final StringBuilder errors = new StringBuilder();
 
       if (!this.inscricao.matches(REPETICAO)) {
-         errors.append("A inscrição não deve ter números repetidos.");
+         errors.append("A inscricao nao deve ter numeros repetidos.");
       }
       if (!this.inscricao.matches(NUMEROS_VALIDOS)) {
-         errors.append("A inscrição deve ter apenas valores impares.");
+         errors.append("A inscricao deve ter apenas valores impares.");
       }
       if (!this.inscricao.matches(TAMANHO)) {
-         errors.append("A inscrição deve ter 5 caracteres.");
+         errors.append("A inscricao deve ter 5 caracteres.");
       }
       return errors.toString();
    }

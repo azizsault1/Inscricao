@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import model.Candidato;
-import validators.PosValidador;
+import servicos.CandidatoServico;
 import validators.PreValidator;
 
 public class Janela extends JFrame {
@@ -26,11 +26,13 @@ public class Janela extends JFrame {
    private static final String RESULTADO = "O Resultado é: ";
 
    private final PreValidator preValidator;
+   private final CandidatoServico service;
    private JLabel error;
    private JLabel resultado;
 
    public Janela() {
       this.preValidator = new PreValidator();
+      this.service = new CandidatoServico();
       this.addComponents();
       this.configureWindow();
    }
@@ -96,16 +98,13 @@ public class Janela extends JFrame {
    }
 
    private void executaProcesso(final String inscricao) {
-      this.error.setText("");
-      final PosValidador posValidador = new PosValidador(inscricao);
-      if (!posValidador.isValid()) {
-         this.error.setText(posValidador.getError());
-         return;
-      }
-
-      final Candidato candidato = new Candidato(inscricao);
-      this.resultado.setText(RESULTADO + candidato.getPosicao());
-
+		this.error.setText("");
+		try {
+			  Candidato candidato = this.service.executa(inscricao);
+			  this.resultado.setText(RESULTADO + candidato.getPosicao());
+		} catch (Exception e) {
+			this.error.setText(e.getMessage());
+		}
    }
 
    public static void main(final String[] args) {
