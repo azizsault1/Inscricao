@@ -70,9 +70,13 @@ public class Janela extends JFrame {
       inscricao.addKeyListener(new KeyAdapter() {
          @Override
          public void keyTyped(final KeyEvent e) {
-        	error.setText("");
-            Optional<Erro> opErro = preValidator.validateKeyEvent(e, inscricao.getText());
-            opErro.ifPresent(erro->error.setText(erro.toString()));
+            Janela.this.error.setText("");
+            final Optional<Erro> opErro = Janela.this.preValidator.validateKeyEvent(e.getKeyChar(), inscricao.getText());
+            opErro.ifPresent(erro -> {
+               Janela.this.error.setText(erro.toString());
+               e.consume();
+
+            });
          }
       });
       contentPane.add(inscricao);
