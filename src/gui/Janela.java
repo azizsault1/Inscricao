@@ -72,10 +72,11 @@ public class Janela extends JFrame {
          public void keyTyped(final KeyEvent e) {
             Janela.this.error.setText("");
             final Optional<Erro> opErro = Janela.this.preValidator.validateKeyEvent(e.getKeyChar(), inscricao.getText());
+            System.out.println("Resultado tem erro: " + opErro.isPresent());
             opErro.ifPresent(erro -> {
+               System.out.println("Tem erro");
                Janela.this.error.setText(erro.toString());
                e.consume();
-
             });
          }
       });

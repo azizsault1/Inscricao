@@ -46,4 +46,36 @@ public class PreValidatorTest {
       Assert.assertEquals(e.get(), Erro.IMPARES);
    }
 
+   @Test
+   public void dadoUmaNumeros2QuandoValidaRetornaErro() {
+      final Optional<Erro> e = this.preValidador.validateKeyEvent('2', "135");
+      Assert.assertTrue(e.isPresent());
+      Assert.assertEquals(e.get(), Erro.IMPARES);
+   }
+
+   @Test
+   public void dadoMaisDigitosQue5QuandoValidaRetornaErro() {
+      final Optional<Erro> e = this.preValidador.validateKeyEvent('1', "13579");
+      Assert.assertTrue(e.isPresent());
+      Assert.assertEquals(e.get(), Erro.QUANTIDADE);
+   }
+
+   @Test
+   public void dadoDigito3QuandoValidaRetornaSucesso() {
+      final Optional<Erro> e = this.preValidador.validateKeyEvent('3', "");
+      Assert.assertFalse(e.isPresent());
+   }
+
+   @Test
+   public void dadoDigito5QuandoValidaRetornaSucesso() {
+      final Optional<Erro> e = this.preValidador.validateKeyEvent('5', "");
+      Assert.assertFalse(e.isPresent());
+   }
+
+   @Test
+   public void dadoDigito7QuandoValidaRetornaSucesso() {
+      final Optional<Erro> e = this.preValidador.validateKeyEvent('7', "");
+      Assert.assertFalse(e.isPresent());
+   }
+
 }

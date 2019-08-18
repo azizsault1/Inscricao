@@ -14,10 +14,19 @@ public class PreValidador {
       if (!Character.isDigit(nextChar)) {
          return Optional.of(Erro.IMPARES);
       }
-      if (text.length() > MAXIMUM_SIZE) {
+
+      if (text.length() >= MAXIMUM_SIZE) {
          return Optional.of(Erro.QUANTIDADE);
       }
 
+      if (this.isNotValidChar(nextChar)) {
+         return Optional.of(Erro.IMPARES);
+      }
+
       return Optional.empty();
+   }
+
+   private boolean isNotValidChar(final char value) {
+      return (value != '1') && (value != '3') && (value != '5') && (value != '7') && (value != '9');
    }
 }
