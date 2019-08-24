@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +12,6 @@ import javax.swing.JTextField;
 
 import model.Candidato;
 import servicos.CandidatoServico;
-import validators.Erro;
 import validators.PreValidador;
 
 public class Janela extends JFrame {
@@ -71,13 +69,12 @@ public class Janela extends JFrame {
          @Override
          public void keyTyped(final KeyEvent e) {
             Janela.this.error.setText("");
-            final Optional<Erro> opErro = Janela.this.preValidator.validateKeyEvent(e.getKeyChar(), inscricao.getText());
-            System.out.println("Resultado tem erro: " + opErro.isPresent());
-            opErro.ifPresent(erro -> {
-               System.out.println("Tem erro");
-               Janela.this.error.setText(erro.toString());
+            final String insc = inscricao.getText() + e.getKeyChar();
+            final boolean isNotValid = !Janela.this.preValidator.isValid(insc);
+            if (isNotValid) {
+               Janela.this.error.setText(Janela.this.preValidator.getErros());
                e.consume();
-            });
+            }
          }
       });
       contentPane.add(inscricao);
@@ -109,7 +106,7 @@ public class Janela extends JFrame {
    private void executaProcesso(final String inscricao) {
       this.error.setText("");
       try {
-         final Candidato candidato = this.service.registrarCandidato(inscricao);
+         final Candidato candidato = this.service.registrarCandidato(new Candidato(inscricao));
          this.resultado.setText(RESULTADO + candidato.getPosicao());
       } catch (final Exception e) {
          this.error.setText(e.getMessage());

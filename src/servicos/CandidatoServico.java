@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.Candidato;
+import model.CandidatoIn;
 import validators.PosValidador;
 
 public class CandidatoServico {
@@ -15,10 +16,15 @@ public class CandidatoServico {
       return new ArrayList<>(Arrays.asList('1', '3', '5', '7', '9'));
    }
 
-   public Candidato registrarCandidato(final String inscricao) {
-      final PosValidador posValidador = new PosValidador(inscricao);
-      if (!posValidador.isValid()) {
-    	  String mensagem = posValidador.getErros();
+   public Candidato registrarCandidato(final CandidatoIn candidatoIn) {
+      if (candidatoIn == null) {
+         throw new IllegalArgumentException("O candidato nao pode ser nulo.");
+      }
+
+      final String inscricao = candidatoIn.getInscricao();
+      final PosValidador posValidador = new PosValidador();
+      if (!posValidador.isValid(inscricao)) {
+         final String mensagem = posValidador.getErros(inscricao);
          throw new IllegalArgumentException(mensagem);
       }
 

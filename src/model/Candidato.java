@@ -1,6 +1,6 @@
 package model;
 
-public class Candidato {
+public class Candidato implements CandidatoIn {
 
    private final String inscricao;
    private int posicao;
@@ -9,6 +9,7 @@ public class Candidato {
       this.inscricao = inscricao;
    }
 
+   @Override
    public String getInscricao() {
       return this.inscricao;
    }
@@ -20,4 +21,5 @@ public class Candidato {
    public void setPosicao(final int posicao) {
       this.posicao = posicao;
    }
+
 }
