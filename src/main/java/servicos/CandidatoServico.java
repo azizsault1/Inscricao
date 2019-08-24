@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import model.Candidato;
 import validators.PosValidador;
 
+@Service
 public class CandidatoServico {
 
    private static final int QUANTIDADE_MENOS_UM = 4;
