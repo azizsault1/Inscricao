@@ -6,6 +6,9 @@ build
 /bin/
 .classpath
 .project
+<<<<<<< HEAD
 .classpath
 .project
 gradlew
+=======
+>>>>>>> develop

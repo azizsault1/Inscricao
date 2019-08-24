@@ -3,6 +3,8 @@ package validators;
 import org.junit.Assert;
 import org.junit.Test;
 
+import validators.PosValidador;
+
 public class PosValidadorTest {
 
    private final PosValidador posValidador;

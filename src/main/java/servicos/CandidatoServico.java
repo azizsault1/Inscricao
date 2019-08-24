@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.Candidato;
 import model.CandidatoIn;
-import validators.PosValidador;
+import validadores.PosValidador;
 
 public class CandidatoServico {
 

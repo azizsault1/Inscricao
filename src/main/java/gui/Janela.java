@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 import model.Candidato;
 import servicos.CandidatoServico;
-import validators.PreValidador;
+import validadores.PreValidador;
 
 public class Janela extends JFrame {
    private static final long serialVersionUID = 1L;

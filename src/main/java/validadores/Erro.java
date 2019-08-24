@@ -1,4 +1,4 @@
-package validators;
+package validadores;
 
 public enum Erro {
 
