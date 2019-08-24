@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import model.Candidato;
+import servicos.CandidatoServico;
 
 public class CandidatoServicoTest {
 
